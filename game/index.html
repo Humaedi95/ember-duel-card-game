@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Duel — a card battler</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand">🔥 EMBER DUEL</div>
+    <div class="topstats">
+      <span id="turnLabel">Turn 1</span>
+      <span id="scoreLabel">Wins 0 · Losses 0</span>
+      <button id="muteBtn" type="button" title="Mute (M)">🔊 Sound</button>
+      <button id="helpBtn" type="button" title="How to play">? Rules</button>
+    </div>
+  </header>
+
+  <main id="table">
+    <section id="foeZone" class="zone" aria-label="Opponent">
+      <div class="fighter foe">
+        <div class="avatar foeAvatar">🧑‍🎤</div>
+        <div class="fighterInfo">
+          <div class="fighterName">Cinder — the Ember AI</div>
+          <div class="lifeRow">
+            <span class="lifeLabel">LIFE</span>
+            <div class="lifeBar"><div id="foeLifeFill" class="lifeFill foeFill"></div></div>
+            <span id="foeLifeText" class="lifeText">30 / 30</span>
+            <span id="foeShield" class="shieldBadge" title="Shield absorbs damage">🛡 0</span>
+          </div>
+          <div class="manaRow" id="foeMana" aria-label="Opponent mana"></div>
+        </div>
+      </div>
+      <div id="foeHand" class="hand foeHand" aria-label="Opponent hand"></div>
+    </section>
+
+    <section id="midZone" class="zone">
+      <div id="playedRow" class="playedRow" aria-label="Last cards played"></div>
+      <div id="logBox" class="logBox" aria-label="Battle log"></div>
+      <button id="endTurnBtn" type="button">End Turn ⏎ (E)</button>
+    </section>
+
+    <section id="youZone" class="zone" aria-label="You">
+      <div id="youHand" class="hand youHand" aria-label="Your hand"></div>
+      <div class="fighter you">
+        <div class="avatar youAvatar">🧑‍🚀</div>
+        <div class="fighterInfo">
+          <div class="fighterName">You — Ember Keeper</div>
+          <div class="lifeRow">
+            <span class="lifeLabel">LIFE</span>
+            <div class="lifeBar"><div id="youLifeFill" class="lifeFill youFill"></div></div>
+            <span id="youLifeText" class="lifeText">30 / 30</span>
+            <span id="youShield" class="shieldBadge" title="Shield absorbs damage">🛡 0</span>
+          </div>
+          <div class="manaRow" id="youMana" aria-label="Your mana"></div>
+          <div id="chainHint" class="chainHint"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="titleScreen" class="overlay">
+    <div class="panel titlePanel">
+      <div class="titleEmber">🔥</div>
+      <h1>EMBER DUEL</h1>
+      <p class="tagline">A turn-based card battler. Outwit Cinder, the Ember AI —<br>
+      chain suits, spend your mana, and burn their life to zero.</p>
+      <div class="titleCards" id="titleCards"></div>
+      <div class="rulesBox">
+        <div><b>⚔️ Attack</b> — damage the foe, shield soaks it first.</div>
+        <div><b>🛡 Shield</b> — armour that stays until it breaks.</div>
+        <div><b>🔗 Ember Chain</b> — play two cards of the same suit in one turn, the second hits +2.</div>
+        <div><b>🔷 Mana</b> — grows +1 every turn, up to 10. Cards cost mana.</div>
+        <div><b>⌨️ Keys</b> — 1–7 pick a card · Enter plays it · E ends the turn · M mutes.</div>
+      </div>
+      <button id="startBtn" type="button" class="bigBtn">▶ Start Duel</button>
+      <p class="fine">Original game · 4 suits: Flame 🔥 Leaf 🍃 Tide 💧 Spark ⚡ · first to 0 life loses</p>
+    </div>
+  </div>
+
+  <div id="endScreen" class="overlay hidden">
+    <div class="panel endPanel">
+      <div id="endEmblem" class="endEmblem">🏆</div>
+      <h1 id="endTitle">YOU WIN!</h1>
+      <p id="endText" class="tagline"></p>
+      <div id="endStats" class="endStats"></div>
+      <button id="againBtn" type="button" class="bigBtn">↻ Play Again</button>
+      <p class="fine">Press Enter or click Play Again to duel once more.</p>
+    </div>
+  </div>
+
+  <div id="rulesScreen" class="overlay hidden">
+    <div class="panel rulesPanel">
+      <h2>How to play Ember Duel</h2>
+      <p>Each turn you gain mana and draw a card. Click a card (or press 1–7, then Enter) to play it.
+      Attack damages the foe's shield first, then their life. Shield cards protect you.
+      Healing restores life. Draw cards refill your hand. Mana cards give extra mana this turn.</p>
+      <p><b>Ember Chain:</b> playing two cards of the same suit in one turn gives the second card +2 attack.
+      Watch Cinder's last suit — chain yours, and break theirs.</p>
+      <p><b>Suits:</b> 🔥 Flame hits hard · 🍃 Leaf shields and heals · 💧 Tide draws and feeds mana ·
+      ⚡ Spark bursts with extra tricks.</p>
+      <p>First fighter to 0 life loses. Good luck, Keeper.</p>
+      <button id="closeRulesBtn" type="button" class="bigBtn">Close</button>
+    </div>
+  </div>
+</div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
